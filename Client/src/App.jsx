@@ -6,6 +6,7 @@ import LoginPage from "./Pages/UserAuth/LoginPage"
 // import signup page
 import SignUpPage from "./Pages/UserAuth/SignUp"
 import ErrorPage from "./Components/Error/ErrorPage";
+import Otp from "./Components/UserAuth/Otp";
 
 
 
@@ -22,8 +23,11 @@ function App() {
       {/* SignUpPage */}
       <Route path="/signup" element={<SignUpPage />} />
 
+       {/* Otp Page */}
+       <Route path="/user_otp" element={<Otp />} />
+
       {/* 404 page */}
-      <Route path="*" element={<ErrorPage />} />
+      <Route path="/" element={<ErrorPage />} />
     </Routes>
     </Router>
     </>
