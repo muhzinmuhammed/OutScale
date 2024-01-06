@@ -1,12 +1,24 @@
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import loginpage
+import LoginPage from "./Pages/UserAuth/LoginPage"
+
+
+
 function App() {
   
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+     <Router>
+      <Routes>
+    {/* /loginpage/ */}
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* 404 page */}
+      <Route path="*" element={<LoginPage />} />
+    </Routes>
+    </Router>
     </>
   )
 }
