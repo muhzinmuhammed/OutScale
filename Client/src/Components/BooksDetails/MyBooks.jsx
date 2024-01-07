@@ -105,7 +105,7 @@ const MyBooks = () => {
     return (
      <>
      <ToastContainer/>
-      <div className='bg-purple-950 h-[100%] font-serif text-white'>
+      <div className='bg-purple-950 h-screen font-serif text-white'>
       <Link to={'/add_book'}>  <button className="bg-purple-400 rounded-md  hover:bg-white hover:text-purple-400 float-end me-20 mt-10 mx-auto px-5 py-2 ">Add Books</button>
       </Link> 
       <div className='text-center py-10'>
@@ -113,25 +113,31 @@ const MyBooks = () => {
           <h1 className='text-4xl w-96 mx-auto leading-normal font-bold mb-12'>Collections Of My Books</h1>
           <input type='search' placeholder='search'/>
           <div className='grid xl:grid-cols-3 sm:grid-cols-2 mt-10 max-w-5xl gap-8 mx-auto group'>
-  {books?.map((book) => (
+          {books?.length === 0 ? (
+  <h1 className="flex items-center justify-center mx-auto font-extrabold">No books available</h1>
+) : (
+  books?.map((book) => (
     <div
       key={book.id} // Don't forget to add a unique key to each element in the array
       className='bg-white/10 group-hover:blur-sm hover:!blur-none group-hover:scale-[0.85] hover:!scale-100 duration-500 cursor-pointer p-8 rounded-xl '
     >
-      <img className='h-20 mx-auto w-full ' src={`${baseUrl}/${book?.imageUrl}`} alt={book?.bookName} />
+      <img className='h-20 mx-auto w-full' src={`${baseUrl}/${book?.imageUrl}`} alt={book?.bookName} />
       <h4 className='font-bold uppercase text-xl'>{book?.bookName}</h4>
       <p className='text-sm leading-7 my-3 font-light opacity-50'>
         {book?.content}
       </p>
       <div className="grid grid-cols-2 gap-3">
-      <button className='gap-2 py-2.5  px-8 rounded-full'><FaEdit size={30} /></button>
+        <button className='gap-2 py-2.5 px-8 rounded-full'><FaEdit size={30} /></button>
         {
-            book?.status==true ? <button onClick={() => handleUnPublish(book?._id)} className='gap-x-2 py-2.5 px-8 rounded-full'><FaBookmark size={30}/></button> :<button onClick={() => handlePublish(book?._id)} className='gap-x-2 py-2.5 px-8 rounded-full'><GoBookmarkSlashFill size={30} /></button>
+          book?.status === true ? 
+            <button onClick={() => handleUnPublish(book?._id)} className='gap-x-2 py-2.5 px-8 rounded-full'><FaBookmark size={30} /></button> :
+            <button onClick={() => handlePublish(book?._id)} className='gap-x-2 py-2.5 px-8 rounded-full'><GoBookmarkSlashFill size={30} /></button>
         }
-        
       </div>
     </div>
-  ))}
+  ))
+)}
+
 </div>
           
       </div>

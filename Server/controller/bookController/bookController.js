@@ -169,7 +169,7 @@ const getOtherUserBook = async (req, res) => {
         const { id } = req?.params
         
 
-        const posts =  await BooksModel?.find({ userId: { $ne: id } })?.populate('userId');
+        const posts =  await BooksModel?.find()?.populate('userId');
         if (posts) {
             return res?.status(200)?.json({ posts })
 
