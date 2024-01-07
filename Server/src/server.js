@@ -5,7 +5,12 @@ import "dotenv/config";
 //  mongodb connection
 import connectToDb from '../Connection/config.js';
 
+/*import user router*/
 import userRouter from "../routes/userRouter.js";
+
+/*import book router*/
+import bookRouter from "../routes/bookRouter.js";
+
 
 const app=express()
 const PORT = process.env.PORT
@@ -19,6 +24,8 @@ app.use(morgan('tiny'));
 app.use("/api/auth", userRouter);
 /*user route*/
 
+/*book route*/
+app.use("/api/books", bookRouter);
 connectToDb()
 
 app.listen(PORT)

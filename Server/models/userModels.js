@@ -28,11 +28,10 @@ const userSchema = new Schema(
       },
     ],
     
-    isBlocked: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
+    saved:[{
+      type: Schema.Types.ObjectId,
+      ref: "books",
+    }],
    
     createdAt: {
       type: Date,

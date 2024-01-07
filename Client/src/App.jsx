@@ -13,6 +13,7 @@ import Otp from "./Components/UserAuth/Otp";
 import AllBooksPage from "./Pages/BookDetail/AllBooksPage";
 //import my books
 import MyBooksPage from "./Pages/BookDetail/MyBooks";
+import AddBookPage from "./Pages/BookDetail/AddBook";
 
 
 
@@ -40,6 +41,8 @@ function App() {
 
       {/* my books */}
       <Route path="/my_book" element={<MyBooksPage />} />
+
+      <Route path="/add_book" element={<AddBookPage/>}/>
 
     </Routes>
     </Router>
