@@ -8,6 +8,7 @@ const AddBook = () => {
     const [bookName,setBookName]=useState()
     const [description,setDescription]=useState()
     const [content,setContent]=useState()
+    const [price,setPrice]=useState(0)
     const [imageUrl,setImageUrl]=useState('')
     
     const [cloudinaryURL,setCloudinaryURL]=useState('')
@@ -42,7 +43,8 @@ const AddBook = () => {
             description,
             content,
             userId:storedUserData._id,
-            imageUrl:cloudinaryURL
+            imageUrl:cloudinaryURL,
+            bookPrice:price
            
           })
           .then((response) => {
@@ -50,7 +52,7 @@ const AddBook = () => {
             
             toast.success("Book Published  successfully");
             setTimeout(() => {
-                navigate("/");
+                navigate("/my_book");
                 
             }, 1000);
           })
@@ -101,6 +103,13 @@ const AddBook = () => {
           Content
         </label>
         <input value={content}  onChange={(e) => setContent(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Enter Book Content"/>
+      </div>
+
+      <div className="mb-5">
+        <label className="block text-gray-700 text-sm font-bold mb-2" >
+          Price
+        </label>
+        <input value={price}  onChange={(e) => setPrice(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="number" placeholder="Enter Book Price"/>
       </div>
 
       <div className="mb-5">

@@ -25,6 +25,11 @@ const BookSchema = new Schema(
         default:true
     
       },
+      bookPrice:{
+        type:Number,
+        required:true
+        
+      },
 
     userId: {
          type: Schema.Types.ObjectId,
@@ -40,7 +45,8 @@ const BookSchema = new Schema(
   }
 );
 
-BookSchema.index({title: "text"});
-BookSchema.index({content: "text"});
+//Create text indexes for bookName and content
+BookSchema.index({ bookName: "text" });
+BookSchema.index({ content: "text" });
 
 export default model("books", BookSchema);

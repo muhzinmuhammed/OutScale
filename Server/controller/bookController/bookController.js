@@ -1,4 +1,4 @@
-
+/*import book models*/
 import BooksModel from "../../models/bookModel.js";
 import  sanitize  from 'mongo-sanitize';
 
@@ -8,8 +8,8 @@ import  sanitize  from 'mongo-sanitize';
 const AddBook = async (req, res) => {
     try {
 
-        const { bookName, description, content, imageUrl, userId } = req?.body
-        if (!bookName || !description || !content || !userId) {
+        const { bookName, description, content, imageUrl, userId,bookPrice } = req?.body
+        if (!bookName || !description || !content || !userId || !bookPrice) {
             return res?.status(400)?.json({ message: "All fields are required" });
         }
         const newPost = new BooksModel({
@@ -17,6 +17,7 @@ const AddBook = async (req, res) => {
             description:sanitize(description),
             content:sanitize(content),
             imageUrl:sanitize(imageUrl),
+            bookPrice:sanitize(bookPrice),
 
             userId:sanitize(userId)
 
@@ -91,20 +92,22 @@ const deleteBook = async (req, res) => {
 /*search post*/
 
 const handleSearch = async (req, res, next) => {
-    const { searchItem } = req?.body;
-
-
-
+    const { searchItem } = req.body;
+    console.log(req.body); // Remove optional chaining for required property
+  
     try {
-        const results = await BooksModel?.find({ $text: { $search: searchItem } });
-        console?.log(results);
-
-        res?.status(200)?.json({ results });
-
+      const results = await BooksModel.find({
+        $text: { $search: searchItem, $caseSensitive: false }
+      });
+  
+      console.log(results);
+  
+      res.status(200).json({ results }); // Remove optional chaining for response
+  
     } catch (error) {
-        res?.status(500)?.json({ status: "failed", message: error?.message });
+      res.status(500).json({ status: "failed", message: error.message }); // Remove optional chaining for error
     }
-};
+  };
 
 
 
@@ -169,7 +172,7 @@ const getOtherUserBook = async (req, res) => {
         const { id } = req?.params
         
 
-        const posts =  await BooksModel?.find()?.populate('userId');
+        const posts =  await BooksModel?.find()?.populate('userId').where({status:true})
         if (posts) {
             return res?.status(200)?.json({ posts })
 
