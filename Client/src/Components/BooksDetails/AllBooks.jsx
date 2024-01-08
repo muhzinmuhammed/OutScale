@@ -15,11 +15,11 @@ const AllBooks = () => {
   const booksPerPage = 6;
 
   const offset = currentPage * booksPerPage;
-  const currentBooks = books.slice(offset, offset + booksPerPage);
+  const currentBooks = books?.slice(offset, offset + booksPerPage);
 
-  const pageCount = Math.ceil(books.length / booksPerPage);
+  const pageCount = Math.ceil(books?.length / booksPerPage);
   useEffect(() => {
-    const userData = localStorage.getItem("userData");
+    const userData = localStorage?.getItem("userData");
     const parseData = userData ? JSON.parse(userData) : null;
     if (parseData) {
       navigate("/");
@@ -95,7 +95,7 @@ const AllBooks = () => {
 ) : (
   currentBooks?.map((book) => (
     <div
-      key={book.id} // Don't forget to add a unique key to each element in the array
+      key={book?.id} // Don't forget to add a unique key to each element in the array
       className='bg-white/10 group-hover:blur-sm hover:!blur-none group-hover:scale-[0.85] hover:!scale-100 duration-500 cursor-pointer p-8 rounded-xl'
     >
       <img className='h-20 mx-auto w-full' src={`${baseUrl}/${book?.imageUrl}`} alt={book?.bookName} />
