@@ -43,7 +43,7 @@ const MyBooks = () => {
   const offset = currentPage * booksPerPage;
   const currentBooks = books?.slice(offset, offset + booksPerPage);
 
-  const pageCount = Math.ceil(books?.length / booksPerPage);
+  const pageCount = Math.ceil(books.length / booksPerPage);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
