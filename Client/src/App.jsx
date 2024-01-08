@@ -16,7 +16,7 @@ import MyBooksPage from "./Pages/BookDetail/MyBooks";
 //import Add books
 import AddBookPage from "./Pages/BookDetail/AddBook";
 //import Edit books
-import EditBook from "./Components/BooksDetails/EditBook";
+import EditBookPage from "./Pages/BookDetail/EditBookPage";
 
 
 
@@ -51,7 +51,7 @@ function App() {
       <Route path="/add_book" element={<AddBookPage/>}/>
 
       {/* Edit book */}
-      <Route path="/edit_book/:id" element={<EditBook/>}/>
+      <Route path="/edit_book/:id" element={<EditBookPage/>}/>
 
     </Routes>
     </Router>

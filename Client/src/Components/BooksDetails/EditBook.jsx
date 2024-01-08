@@ -64,7 +64,7 @@ const EditBook = () => {
             
             toast.success("Post update successfully");
             setTimeout(() => {
-                navigate("/");
+                navigate("/my_book");
                 
             }, 1000);
           })

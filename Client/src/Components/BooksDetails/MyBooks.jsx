@@ -167,7 +167,7 @@ const MyBooks = () => {
           <h1 className='text-4xl w-96 mx-auto leading-normal font-bold mb-12'>Collections Of My Books</h1>
           
          <form onSubmit={handleSearch}>
-         <div className="flex items-center justify-center rounded-[5px] ">
+         <div className="flex items-center gap-2 justify-center rounded-[5px] ">
         <input  value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)} type="text" className="bg-[#F8F9FC] text-purple-900 h-[40px] outline-none pl-[13px] w-[350px] rounded-[5px] placeholder:text-[14px] leading-[20px] font-normal "placeholder="Search" />
         <button type="submit" className="bg-[#4E73DF] h-[40px] px-[14px] flex items-center justify-center cursor-pointer rounded-tr-[5px] rounded-br-[5px]">

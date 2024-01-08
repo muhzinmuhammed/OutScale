@@ -1,4 +1,4 @@
-import {  useEffect } from 'react'
+import { useEffect } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const navigation = [
     { name: 'Books', href: '/', current: true },
     { name: 'My Books', href: '/my_book', current: false },
-    { name: 'Saved', href: '#', current: false },
+
 
 ]
 // Get the current URL
@@ -60,7 +60,7 @@ export default function NavBar() {
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <h3 className='font-serif font-bold text-white'>OutScale</h3>
+                                    <h3 className='font-serif font-bold  text-white'>OutScale</h3>
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
@@ -102,29 +102,29 @@ export default function NavBar() {
                                         </> :
 
                                         <>
-                                        <Link to={'/login'}>  <button
-                                            type="button"
-                                            className="relative rounded-[3px] px-5 bg-gray-800 p-1 text-white "
-                                        >Login
+                                            <Link to={'/login'}>  <button
+                                                type="button"
+                                                className="relative rounded-[3px] px-5 bg-gray-800 p-1 text-white "
+                                            >Login
 
 
 
 
-                                        </button>
-                                        </Link>
-                                        <Link to={'/signup'}>  <button
-                                            type="button"
-                                            className="relative rounded-[3px] px-5 bg-gray-800 p-1 text-white "
-                                        >SignUp
+                                            </button>
+                                            </Link>
+                                            <Link to={'/signup'}>  <button
+                                                type="button"
+                                                className="relative rounded-[3px] px-5 bg-gray-800 p-1 text-white "
+                                            >SignUp
 
 
 
 
-                                        </button>
-                                        </Link>
+                                            </button>
+                                            </Link>
                                         </>
 
-                                        
+
 
 
 
