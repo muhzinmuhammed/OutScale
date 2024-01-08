@@ -28,5 +28,5 @@ app.use("/api/auth", userRouter);
 app.use("/api/books", bookRouter);
 connectToDb()
 
-app.listen(PORT)
+app.listen(PORT||8080)
 

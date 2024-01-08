@@ -22,6 +22,7 @@ const globalData = {
 
 // User register
 const userSignup = async (req, res) => {
+    console.log("llll");
     try {
 
 

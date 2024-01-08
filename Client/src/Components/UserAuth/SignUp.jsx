@@ -17,6 +17,7 @@ const Signup = () => {
     const [phone, setPhone] = useState("");
 
     const navigate = useNavigate();
+    
     const isStrongPassword = (password) => {
         // Password must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters.
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
