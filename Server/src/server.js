@@ -22,7 +22,9 @@ const corosoption={
 app.use(cors(corosoption));
 app.use(morgan('tiny'));
 
-
+app.get('/',(req,res)=>{
+    res.send('Hello world')
+})
 /*user route*/
 app.use("/api/auth", userRouter);
 /*user route*/
