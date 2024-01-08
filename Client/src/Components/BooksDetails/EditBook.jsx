@@ -1,17 +1,18 @@
+import React from 'react'
+import { useParams } from 'react-router-dom'
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from "../../AxiosInterceptor/userAxiosInterceptor";
 import axios from "axios";
-const AddBook = () => {
+
+const EditBook = () => {
+    const {id}=useParams()
     const [bookName,setBookName]=useState()
     const [description,setDescription]=useState()
     const [content,setContent]=useState()
     const [price,setPrice]=useState(0)
-    const [imageUrl,setImageUrl]=useState('')
-    
-    const [cloudinaryURL,setCloudinaryURL]=useState('')
     const storedUserDataString = localStorage.getItem("userData");
 
     const storedUserData = storedUserDataString
@@ -19,76 +20,62 @@ const AddBook = () => {
       : null;
   
       const navigate=useNavigate()
-      function handleChange(e) {
-        if (e.target.files && e.target.files.length > 0) {
-            setImageUrl(e.target.files[0]);
-        }
-      }
-    const handleSubmit = async (e) => {
+
+      useEffect(() => {
+        const getData = async (id) => {
+          try {
+            const res = await axiosInstance.get(`/books/edit_book/${id}`);
+            console.log(res.data);
+    
+            res.data.editPost.forEach((item) => {
+              setBookName(item?.bookName || '');
+              setDescription(item?.description || '');
+              setContent(item?.content || '');
+              setPrice(item?.bookPrice || '');
+            });
+          } catch (error) {
+            toast.error('Error fetching data');
+          }
+        };
+    
+        getData(id);
+      }, [id]);
+      const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Perform photo upload first
-        await handlePhotoUpload();
+      
     
-        // Check if the photo upload was successful
-        if (!cloudinaryURL) {
-          toast.error("Error uploading photo");
-          return;
-        }
+       
     
         // Send the course data to your server
         axiosInstance
-          .post("/books/publish", {
+          .patch(`/books/update_book/${id}`, {
             bookName,
             description,
             content,
             userId:storedUserData._id,
-            imageUrl:cloudinaryURL,
             bookPrice:price
+            
            
           })
           .then((response) => {
+
             console.log(response.data);
             
-            toast.success("Book Published  successfully");
+            toast.success("Post update successfully");
             setTimeout(() => {
-                navigate("/my_book");
+                navigate("/");
                 
             }, 1000);
           })
           .catch((error) => {
             console.error(error);
-            toast.error("Error adding Book");
+            toast.error("Error updatin Book");
           });
     };
 
-    const handlePhotoUpload = async () => {
-        try {
-          const formData = new FormData();
-          if (imageUrl) {
-            formData.append("file", imageUrl);
-            formData.append("upload_preset", "mtcgx5gz");
-            formData.append("cloud_name", "dfnwvbiyy");
-            const response = await axios.post(
-              "https://api.cloudinary.com/v1_1/dfnwvbiyy/image/upload",
-              formData
-            );
-    
-            setCloudinaryURL(response.data.public_id);
-          }
-        } catch (error) {
-          console.error("Error uploading photo:", error);
-        }
-      };
-      useEffect(() => {
-        const userData = localStorage.getItem("userData");
-        const parseData = userData ? JSON.parse(userData) : null;
-        if (!parseData) {
-          navigate("/login");
-        }
-      }, [navigate]);
   return (
-   <>
+    <>
    <ToastContainer/>
     <div className="flex items-center justify-center w-full  bg-purple-950 h-screen  ">
     <form onSubmit={(e) => handleSubmit(e)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -119,24 +106,7 @@ const AddBook = () => {
         <input value={price}  onChange={(e) => setPrice(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="number" placeholder="Enter Book Price"/>
       </div>
 
-      <div className="mb-5">
-        <label className="block text-gray-700 text-sm font-bold mb-2" >
-          Image
-        </label>
-        <input
-            type="file"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-            accept="image/*" // Specify the file type
-            onChange={handleChange}
-          />
-          {imageUrl && (
-            <img
-              src={URL.createObjectURL(imageUrl)}
-              alt="Course"
-              style={{ height: "100px", width: "100px" }}
-            />
-          )}
-      </div>
+      
       <div className="flex items-center justify-center">
         <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           Sumbit
@@ -147,7 +117,8 @@ const AddBook = () => {
     
   </div>
    </>
+   
   )
 }
 
-export default AddBook
+export default EditBook

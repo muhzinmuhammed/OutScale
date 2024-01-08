@@ -26,7 +26,7 @@ const Login = () => {
         }
       }, [navigate]);
       const handleSubmit=async(e)=>{
-        console.log("kkk");
+        
         e.preventDefault();
         const trimmedEmail = useremail.trim();
         const trimmedPassword = password.trim();

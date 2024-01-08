@@ -117,6 +117,7 @@ const handleSearch = async (req, res, next) => {
 
 const editBookDetails = async (req, res) => {
     try {
+        
         const { id } = req?.params
         const editPost = await BooksModel?.find({ _id: id })
 
@@ -137,8 +138,9 @@ const editBookDetails = async (req, res) => {
 const updateBookDetails = async (req, res) => {
     try {
         
+        
         const { id } = req?.params;
-        const { bookName, description, content } = req?.body;
+        const { bookName, description, content,bookPrice } = req?.body;
 
         const postFind = await BooksModel?.findById(id);
 
@@ -146,6 +148,7 @@ const updateBookDetails = async (req, res) => {
             await BooksModel?.findByIdAndUpdate(id, {
                 bookName,
                 description,
+                bookPrice,
 
                 content,
             });

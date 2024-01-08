@@ -28,6 +28,13 @@ bookRouer.put('/published/:id',protect,userPublishdBook)
 
 bookRouer.get('/user/:id',protect,getUserBooks)
 
+/* Edit user Book*/ 
+bookRouer.get('/edit_book/:id',protect,editBookDetails)
+
+/* Update user Book*/ 
+bookRouer.patch('/update_book/:id',protect,updateBookDetails)
+
+
 
 /* other users books*/
 

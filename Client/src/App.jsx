@@ -13,7 +13,10 @@ import Otp from "./Components/UserAuth/Otp";
 import AllBooksPage from "./Pages/BookDetail/AllBooksPage";
 //import my books
 import MyBooksPage from "./Pages/BookDetail/MyBooks";
+//import Add books
 import AddBookPage from "./Pages/BookDetail/AddBook";
+//import Edit books
+import EditBook from "./Components/BooksDetails/EditBook";
 
 
 
@@ -42,7 +45,13 @@ function App() {
       {/* my books */}
       <Route path="/my_book" element={<MyBooksPage />} />
 
+
+      {/* Add Book */}
+
       <Route path="/add_book" element={<AddBookPage/>}/>
+
+      {/* Edit book */}
+      <Route path="/edit_book/:id" element={<EditBook/>}/>
 
     </Routes>
     </Router>

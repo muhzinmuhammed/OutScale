@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import axiosInstance from "../../AxiosInterceptor/userAxiosInterceptor";
 import { toast, ToastContainer } from "react-toastify";
@@ -28,6 +28,14 @@ const MyBooks = () => {
             toast.error(error.message);
           });
       }, []);
+      const navigate=useNavigate()
+      useEffect(() => {
+        const userData = localStorage.getItem("userData");
+        const parseData = userData ? JSON.parse(userData) : null;
+        if (!parseData) {
+          navigate("/login");
+        }
+      }, [navigate]);
 
       const [currentPage, setCurrentPage] = useState(0);
   const booksPerPage = 6;
@@ -120,7 +128,7 @@ const MyBooks = () => {
       /*search*/ 
        /* search book*/
   const handleSearch = async (e) => {
-    console.log("kkkkkkkkkkk");
+    
     e.preventDefault();
     try {
       if (searchValue) {
@@ -186,7 +194,9 @@ const MyBooks = () => {
         {book?.content}
       </p>
       <div className="grid grid-cols-2 gap-3">
-        <button className='gap-2 py-2.5 px-8 rounded-full'><FaEdit size={30} /></button>
+      <Link to={`/edit_book/${book?._id}`} className='gap-2 py-2.5 px-8 rounded-full'>
+  <FaEdit size={30} />
+</Link>
         {
           book?.status === true ? 
             <button onClick={() => handleUnPublish(book?._id)} className='gap-x-2 py-2.5 px-8 rounded-full'><FaBookmark size={30} /></button> :

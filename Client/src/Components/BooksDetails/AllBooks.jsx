@@ -4,9 +4,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from "react-router-dom";
 const AllBooks = () => {
     const storedUserDataString = localStorage.getItem("userData");
-   
+   const navigate=useNavigate()
     const [books, setBooks] = useState([]);
     const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState(null);
@@ -17,7 +18,16 @@ const AllBooks = () => {
   const currentBooks = books.slice(offset, offset + booksPerPage);
 
   const pageCount = Math.ceil(books.length / booksPerPage);
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    const parseData = userData ? JSON.parse(userData) : null;
+    if (parseData) {
+      navigate("/");
+    }else{
+      navigate("/login");
 
+    }
+  }, [navigate]);
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
