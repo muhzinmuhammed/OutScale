@@ -11,6 +11,8 @@ import userRouter from "../routes/userRouter.js";
 /*import book router*/
 import bookRouter from "../routes/bookRouter.js";
 
+import { fileURLToPath } from 'url';
+import path,{ dirname } from 'path';
 
 const app=express()
 const PORT = process.env.PORT
@@ -21,10 +23,15 @@ const corosoption={
 }
 app.use(cors(corosoption));
 app.use(morgan('tiny'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-app.get('/',(req,res)=>{
-    res.send('Hello world')
-})
+
+app.use(express.static(path.join(__dirname, "../../Client/dist"))); 
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'../../Client/dist/index.html'))
+});
+
 /*user route*/
 app.use("/api/auth", userRouter);
 /*user route*/

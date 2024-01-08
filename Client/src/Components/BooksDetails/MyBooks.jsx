@@ -41,9 +41,9 @@ const MyBooks = () => {
   const booksPerPage = 6;
 
   const offset = currentPage * booksPerPage;
-  const currentBooks = books.slice(offset, offset + booksPerPage);
+  const currentBooks = books?.slice(offset, offset + booksPerPage);
 
-  const pageCount = Math.ceil(books.length / booksPerPage);
+  const pageCount = Math.ceil(books?.length / booksPerPage);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -137,7 +137,7 @@ const MyBooks = () => {
         });
 
         // Update the searchResults state
-        setSearchResults(response?.data.results);
+        setSearchResults(response?.data?.results);
 
         // Update the post state only if there are search results
         setBooks(response?.data?.results || []);
