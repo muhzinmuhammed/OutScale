@@ -22,6 +22,7 @@ const MyBooks = () => {
         axiosInstance
           .get(`/books/user/${storedUserData?._id}`)
           .then((response) => {
+            console.log(response,"haii");
             setBooks(response?.data?.posts);
           })
           .catch((error) => {

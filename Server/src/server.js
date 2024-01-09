@@ -16,10 +16,10 @@ import path,{ dirname } from 'path';
 
 const app=express()
 const PORT = process.env.PORT
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 const corosoption={
-    origin:'*'
+    origin:['*']
 }
 app.use(cors(corosoption));
 app.use(morgan('tiny'));
@@ -31,6 +31,9 @@ app.use(express.static(path.join(__dirname, "../../Client/dist")));
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,'../../Client/dist/index.html'))
 });
+
+
+
 
 /*user route*/
 app.use("/api/auth", userRouter);

@@ -46,14 +46,17 @@ const AddBook = async (req, res) => {
 /*get Books*/
 
 const getUserBooks = async (req, res) => {
+    
     try {
 
         const { id } = req?.params
         console.log(id);
 
         const posts = await BooksModel?.find({ userId: id })?.populate('userId')
+        console.log(posts,"oooo");
         if (posts) {
-            return res?.status(200)?.json({ posts })
+            
+            return res.status(200).json({ posts })
 
         }
 
