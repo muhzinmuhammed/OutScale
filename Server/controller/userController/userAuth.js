@@ -100,7 +100,7 @@ const loginUser = async (req, res) => {
     try {
         const user = await userModel
             .findOne({ useremail })
-            .where({ isBlocked: false });
+           
 
         // Use UserModel instead of userModel
 
