@@ -107,9 +107,7 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "User not logged in" }); // Use return here to exit the function after sending the response
         }
-        if (user?.isBlocked == true) {
-            return res.status(401).json({ message: "User is Blocked" });
-        }
+       
 
         if (user && (await user.matchPassword(password))) {
             const token = generateToken(user._id);

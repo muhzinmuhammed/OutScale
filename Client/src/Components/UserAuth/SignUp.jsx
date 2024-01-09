@@ -36,6 +36,7 @@ const Signup = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
 
         const trimmedName = username.trim();
         const trimmedEmail = useremail.trim();
@@ -79,7 +80,7 @@ const Signup = () => {
                 phone: trimmedPhone,
                 password: trimmedPassword,
             });
-            console.log(response.data);
+            console.log(response,"pp");
 
             navigate('/user_otp');
         } catch (error) {

@@ -23,13 +23,13 @@ const AddBook = async (req, res) => {
 
 
         })
-        await newPost?.save()
+        await newPost.save()
 
         if (newPost) {
-            return res?.status(200)?.json({ newPost })
+            return res.status(200).json({ newPost })
 
         } else {
-            return res?.status(500)?.json({ Message: "Some error" })
+            return res.status(500).json({ Message: "Some error" })
         }
 
 
@@ -52,8 +52,8 @@ const getUserBooks = async (req, res) => {
         const { id } = req?.params
         console.log(id);
 
-        const posts = await BooksModel?.find({ userId: id })?.populate('userId')
-        console.log(posts,"oooo");
+        const posts = await BooksModel.find({ userId: id }).populate('userId')
+        
         if (posts) {
             
             return res.status(200).json({ posts })
@@ -74,18 +74,18 @@ const getUserBooks = async (req, res) => {
 const deleteBook = async (req, res) => {
     try {
         const { id } = req?.params
-        const userPost = await BooksModel?.find({ _id: id })
+        const userPost = await BooksModel.find({ _id: id })
         if (userPost) {
-            await BooksModel?.findByIdAndDelete(id)
+            await BooksModel.findByIdAndDelete(id)
 
-            res?.status(200)?.json("POst deleted successfully");
+            res?.status(200).json("POst deleted successfully");
 
         } else {
-            res?.status(500)?.json({ message: "no Post to display" });
+            res?.status(500).json({ message: "no Post to display" });
         }
 
     } catch (error) {
-        res?.status(500)?.json({ error: "Internal Server Error" });
+        res?.status(500).json({ error: "Internal Server Error" });
 
     }
 }

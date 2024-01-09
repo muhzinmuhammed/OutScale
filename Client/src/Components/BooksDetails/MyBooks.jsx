@@ -11,7 +11,8 @@ const MyBooks = () => {
     const storedUserDataString = localStorage.getItem("userData");
     const [books, setBooks] = useState([]);
     const [searchValue, setSearchValue] = useState("");
-  const [searchResults, setSearchResults] = useState(null); // New state for search results
+  const [searchResults, setSearchResults] = useState(null);
+  console.log(searchResults); // New state for search results
     const storedUserData = storedUserDataString
       ? JSON.parse(storedUserDataString)
       : null;
@@ -22,7 +23,7 @@ const MyBooks = () => {
         axiosInstance
           .get(`/books/user/${storedUserData?._id}`)
           .then((response) => {
-            console.log(response,"haii");
+            console.log(response.data,"haii");
             setBooks(response?.data?.posts);
           })
           .catch((error) => {
