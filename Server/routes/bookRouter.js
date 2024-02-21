@@ -32,13 +32,13 @@ bookRouer.get('/user/:id',protect,getUserBooks)
 bookRouer.get('/edit_book/:id',protect,editBookDetails)
 
 /* Update user Book*/ 
-bookRouer.patch('/update_book/:id',protect,updateBookDetails)
+bookRouer.patch('/update_book/:book_id',protect,updateBookDetails)
 
 
 
 /* other users books*/
 
-bookRouer.get('/other_users/:id',protect,getOtherUserBook)
+bookRouer.get('/other_users',getOtherUserBook)
 
 export default bookRouer
 

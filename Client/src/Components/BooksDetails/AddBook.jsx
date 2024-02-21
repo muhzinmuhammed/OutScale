@@ -39,12 +39,13 @@ const AddBook = () => {
         // Send the course data to your server
         axiosInstance
           .post("/books/publish", {
-            bookName,
-            description,
-            content,
+           id: bookName,
+           userid:price,
+           body: description,
+           title:  content,
             userId:storedUserData._id,
             imageUrl:cloudinaryURL,
-            bookPrice:price
+          
            
           })
           .then((response) => {
@@ -58,7 +59,7 @@ const AddBook = () => {
           })
           .catch((error) => {
             console.error(error);
-            toast.error("Error adding Book");
+            toast.error('error');
           });
     };
 
@@ -94,27 +95,27 @@ const AddBook = () => {
     <form onSubmit={(e) => handleSubmit(e)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" >
-          Book Name
+          id
         </label>
-        <input value={bookName}  onChange={(e) => setBookName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Enter Book name"/>
+        <input value={bookName}  onChange={(e) => setBookName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Enter id"/>
       </div>
       <div >
         <label className="block text-gray-700 text-sm font-bold mb-2" >
-        Description
+        Body
         </label>
-        <textarea value={description}  onChange={(e) => setDescription(e.target.value)} className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter Description"/>
+        <textarea value={description}  onChange={(e) => setDescription(e.target.value)} className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter body"/>
       
       </div>
       <div className="mb-5">
         <label className="block text-gray-700 text-sm font-bold mb-2" >
-          Content
+          title
         </label>
         <input value={content}  onChange={(e) => setContent(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Enter Book Content"/>
       </div>
 
       <div className="mb-5">
         <label className="block text-gray-700 text-sm font-bold mb-2" >
-          Price
+          userid
         </label>
         <input value={price}  onChange={(e) => setPrice(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="number" placeholder="Enter Book Price"/>
       </div>

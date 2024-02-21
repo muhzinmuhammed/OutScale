@@ -7,17 +7,31 @@ import  sanitize  from 'mongo-sanitize';
 
 const AddBook = async (req, res) => {
     try {
+        
+       
 
-        const { bookName, description, content, imageUrl, userId,bookPrice } = req?.body
-        if (!bookName || !description || !content || !userId || !bookPrice) {
+        const { id, title, userid, imageUrl, userId,body } = req.body
+
+        const userExists = await BooksModel.findOne({ id });
+        console.log(userExists);
+
+        
+        
+
+        if (userExists ) {
+          
+            return res.status(409).json({ message: "User already exists" });
+        }
+
+        if (!id || !title || !userid || !userId || !body ) {
             return res?.status(400)?.json({ message: "All fields are required" });
         }
         const newPost = new BooksModel({
-            bookName :sanitize(bookName),
-            description:sanitize(description),
-            content:sanitize(content),
+            id :sanitize(id),
+            title:sanitize(title),
+            userid:sanitize(userid),
             imageUrl:sanitize(imageUrl),
-            bookPrice:sanitize(bookPrice),
+            body:sanitize(body),
 
             userId:sanitize(userId)
 
@@ -51,8 +65,10 @@ const getUserBooks = async (req, res) => {
 
         const { id } = req?.params
         console.log(id);
+        
 
         const posts = await BooksModel.find({ userId: id }).populate('userId')
+        console.log(posts);
         
         if (posts) {
             
@@ -123,6 +139,7 @@ const editBookDetails = async (req, res) => {
         
         const { id } = req?.params
         const editPost = await BooksModel?.find({ _id: id })
+       
 
         if (editPost) {
             return res?.status(200)?.json({ editPost })
@@ -142,21 +159,31 @@ const updateBookDetails = async (req, res) => {
     try {
         
         
-        const { id } = req?.params;
-        const { bookName, description, content,bookPrice } = req?.body;
+        const { book_id } = req?.params;
+        console.log(req.params);
+        const { id, title, userid,body } = req?.body;
 
-        const postFind = await BooksModel?.findById(id);
+      
+        
+
+        
+        
+
+      
+        const postFind = await BooksModel?.findById(book_id);
+       
 
         if (postFind) {
-            await BooksModel?.findByIdAndUpdate(id, {
-                bookName,
-                description,
-                bookPrice,
+            await BooksModel?.findByIdAndUpdate(book_id, {
+                id,
+                title,
+                userid,
 
-                content,
+                body,
             });
 
-            const updatedPost = await BooksModel?.findById(id);
+            const updatedPost = await BooksModel?.findById(book_id);
+console.log(updatedPost);
 
             res?.status(200)?.json({ updatedPost });
         } else {
@@ -175,10 +202,11 @@ const updateBookDetails = async (req, res) => {
 const getOtherUserBook = async (req, res) => {
     try {
 
-        const { id } = req?.params
+  
         
 
-        const posts =  await BooksModel?.find()?.populate('userId').where({status:true})
+        const posts =  await BooksModel?.find()
+        console.log(posts,"lll");
         if (posts) {
             return res?.status(200)?.json({ posts })
 

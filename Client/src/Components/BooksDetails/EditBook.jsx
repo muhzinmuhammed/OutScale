@@ -28,10 +28,10 @@ const EditBook = () => {
             console.log(res.data);
     
             res.data.editPost.forEach((item) => {
-              setBookName(item?.bookName || '');
-              setDescription(item?.description || '');
-              setContent(item?.content || '');
-              setPrice(item?.bookPrice || '');
+              setBookName(item?.id || '');
+              setDescription(item?.body || '');
+              setContent(item?.title || '');
+              setPrice(item?.userid || '');
             });
           } catch (error) {
             toast.error('Error fetching data');
@@ -50,11 +50,12 @@ const EditBook = () => {
         // Send the course data to your server
         axiosInstance
           .patch(`/books/update_book/${id}`, {
-            bookName,
-            description,
-            content,
+            id: bookName,
+           userid:price,
+           body: description,
+           title:  content,
             userId:storedUserData._id,
-            bookPrice:price
+          
             
            
           })

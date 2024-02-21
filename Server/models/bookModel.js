@@ -3,15 +3,15 @@ import { model, Schema } from "mongoose";
 const BookSchema = new Schema(
   {
 
-    bookName: {
+    id: {
         type: String,
         required: true,
       },
-      description: {
+      userid: {
         type: String,
        
       },
-      content: {
+      title: {
         type: String,
        
       },
@@ -25,19 +25,20 @@ const BookSchema = new Schema(
         default:true
     
       },
-      bookPrice:{
-        type:Number,
-        required:true
-        
-      },
+     
 
     userId: {
          type: Schema.Types.ObjectId,
          ref: "user"
          },
-         
+         body:{
+          type:String,
+
+          
+        }
 
   },
+  
   
   
   {

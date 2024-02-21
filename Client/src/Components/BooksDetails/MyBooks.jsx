@@ -190,11 +190,16 @@ const MyBooks = () => {
     >
       <img className='h-20 mx-auto w-full' src={`${baseUrl}/${book?.imageUrl}`} alt={book?.bookName} />
       {/* <h4 className='font-bold mt-2 font-mono uppercase text-xl'>{book?.userId?.username}</h4> */}
-      <h4 className='font-bold mt-2 uppercase text-xl'>{book?.bookName}</h4>
-      <h4 className='font-semibold mt-2  text-lg'>{book?.bookPrice}</h4>
+      <h4 className='font-bold mt-2 uppercase text-xl'>User Id: {book?.userid}</h4>
+      <h4 className='font-semibold mt-2  text-lg'>Id: {book?.id}</h4>
       <p className='text-sm leading-7 my-3 font-light opacity-50'>
-        {book?.content}
+      Title: {book?.title}
       </p>
+
+      <p className='text-sm leading-7 my-3 font-light opacity-50'>
+      Body: {book?.body}
+      </p>
+      
       <div className="grid grid-cols-2 gap-3">
       <Link to={`/edit_book/${book?._id}`} className='gap-2 py-2.5 px-8 rounded-full'>
   <FaEdit size={30} />
